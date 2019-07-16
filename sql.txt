@@ -1,4 +1,6 @@
-SELECT order_id, status, delivery_date, courier_id, inner_n, id FROM ORDERS WHERE delivery_date = '".$data."' AND courier_id = '".$_POST['id']."' AND status = 'На доставке'"
+SELECT order_id, status, delivery_date, courier_id, inner_n, id 
+FROM ORDERS 
+WHERE delivery_date = '".$data."' AND courier_id = '".$_POST['id']."' AND status = 'На доставке'"
 --------------------
 UPDATE ORDERS SET status = 'На складе' WHERE order_id = '".$v['order_id']."' LIMIT 1
 --------------------
@@ -49,7 +51,8 @@ FROM (
       DATE_ADD( date(b.date2), INTERVAL CONVERT(c.pay_date, char)+3 DAY) AS debt_date,
       
       IF(ba.b_act_id IS NOT NULL, b.itog_ks, 0) AS debt_acted, 
-      IF(DATE_ADD( ba.date, INTERVAL (CONVERT(c.pay_date, char)+3) DAY) <= date('$enddata'), IF(ba.b_act_id IS NOT NULL, b.itog_ks, 0), 0) AS debt_late
+      IF(DATE_ADD( ba.date, INTERVAL (CONVERT(c.pay_date, char)+3) DAY) <= date('$enddata'), 
+	  IF(ba.b_act_id IS NOT NULL, b.itog_ks, 0), 0) AS debt_late
       FROM BILLS b  
       LEFT JOIN BILL_ACT ba ON b.act_id = ba.b_act_id
       LEFT JOIN CLIENTS c ON b.client_id = c.client_id
@@ -68,17 +71,19 @@ FROM (
   
   --------------------
   
-  SELECT o.inner_n, o.order_id, o.shk, o.courier_id, o.status, o.delivery_date, o.id, c.cr_fullname FROM ORDERS as o
-LEFT JOIN COURIERS as c ON o.courier_id = c.id WHERE o.delivery_date = '".$data."' 
-AND (client_id = '215' OR client_id = '1489') AND (o.brand = 'ПАО' OR o.brand = 'КАРТАНАДОМ') ".$where.""
+SELECT o.inner_n, o.order_id, o.shk, o.courier_id, o.status, o.delivery_date, o.id, c.cr_fullname 
+FROM ORDERS as o
+LEFT JOIN COURIERS as c ON o.courier_id = c.id 
+WHERE o.delivery_date = '".$data."' 
+AND (client_id = '215' OR client_id = '1489') 
+AND (o.brand = 'ПАО' OR o.brand = 'КАРТАНАДОМ') ".$where.""
 
 --------------------
 
-SELECT w.*, m.fullname, COUNT(status) as cnt FROM warehouse_issue as w  
+SELECT w.*, m.fullname, COUNT(status) as cnt 
+	FROM warehouse_issue as w  
 	LEFT JOIN modx_web_user_attributes as m
-
 	ON w.who = m.internalKey
-
 	WHERE w.`date` = '".$postData."' AND status IN (3) GROUP BY who 
 	
 --------------------

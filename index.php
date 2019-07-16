@@ -2,8 +2,7 @@
 <div class="form-inline col-md-10 col-xs-12">
   <span><strong>Выберите курьера:</strong> </span>
   
-    <div class="form-group">
-      
+    <div class="form-group">  
             <select class="form-control hui" id="id" name="id" onchange="kurier();">
             [!gcr!]  
             </select>
@@ -23,7 +22,7 @@
     
 <script>
   function kurier(){
-    var data = $('.hui').serialize();
+    var data = $('.cour').serialize();
     $.ajax({
       type: "POST",
       url: "/[~1220~]",
@@ -35,7 +34,7 @@
   }
   
 function kurier2(){
-    var data = $('.hui').serialize();
+    var data = $('.cour').serialize();
     $.ajax({
       type: "POST",
       url: "/[~1221~]",
@@ -50,15 +49,9 @@ function kurier2(){
 
 
 
-
-
-
-
-
-
 <?php
-$user_id = $modx->getLoginUserID();
-if($id == "2222" || $id == "2641" || $id == "2656" || $id == "2657" || $id == "3" || $user_id == "1283"){
+//$user_id = $modx->getLoginUserID();
+//if($id == "2222" || $id == "2641" || $id == "2656" || $id == "2657" || $id == "3" || $user_id == "1283"){
   
     if($_POST != "")
     {
@@ -162,9 +155,7 @@ $db_password = ''; // пароль
 $db_name = 'test4'; // имя базы данных
 $link = mysqli_connect($db_host,$db_user,$db_password,$db_name);
 $res = mysqli_query($link,"INSERT INTO usernames (text) VALUES ('".$_POST['text']."')")
-or die("ERROR: ".mysqli_error($link));
-
-	
+or die("ERROR: ".mysqli_error($link));	
 ?>
 
 
@@ -285,12 +276,15 @@ else{
 }
 
 echo $val ;
-
-
 ?>
 
 
-SELECT o.order_id, cli.client_id, cli.manager_id, cli.client_name, mu.fullname,  o.delivery_date
+
+	
+
+<?php
+#print_r($_POST);
+ SELECT o.order_id, cli.client_id, cli.manager_id, cli.client_name, mu.fullname,  o.delivery_date
 FROM  CLIENTS as cli 
 LEFT JOIN  ORDERS as o ON cli.client_id = o.client_id
 LEFT JOIN modx_web_user_attributes as mu  ON mu.internalKey = cli.manager_id
@@ -298,11 +292,8 @@ WHERE
  (cli.manager_id = '1421' OR cli.manager_id = '1424' OR cli.manager_id = '949')
 AND o.client_id = '".$v['client_id']."'
 ORDER BY o.order_id
-LIMIT 1
-	
-
-<?php
-#print_r($_POST);
+LIMIT 1 
+  
   
 if (!$_POST['date1']) {
   return 'выберите дату';
@@ -601,28 +592,7 @@ echo $table;
 
 
 
-SELECT o.order_id, cli.client_id, cli.manager_id, cli.client_name, mu.fullname,  o.delivery_date
-FROM  CLIENTS as cli 
-LEFT JOIN  ORDERS as o ON cli.client_id = o.client_id
-LEFT JOIN modx_web_user_attributes as mu  ON mu.internalKey = cli.manager_id
-WHERE
- (cli.manager_id = '1421' OR cli.manager_id = '1424' OR cli.manager_id = '949')
-AND o.client_id = '2818'
-ORDER BY o.order_id
-LIMIT 1
-
-
-
-
-
-
-
-
-
-
-
-
-
+<?php
 
 
 
@@ -659,9 +629,9 @@ if($_POST){
 	}
 	
 }
-?>
 
-<?php
+
+
 if($_POST){	
 	$postData = preg_replace("/(\d\d).(\d\d).(\d\d\d\d)/","\\3-\\2-\\1",$_POST['date']);	
 	
@@ -827,10 +797,6 @@ if ($rows == ""){echo "<tr><td colspan=6><div class='alert alert-success'>По �
 			//if($summ[$key]){
 			$bnalsumm += $summ[$key];	
 			//}
-			
-			
-			
-			
 			
 				
 		}
