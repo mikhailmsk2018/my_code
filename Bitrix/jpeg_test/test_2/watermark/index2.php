@@ -1,0 +1,1 @@
+<img src="watermark.php?image=original.jpg" alt="Какой-то текст" />

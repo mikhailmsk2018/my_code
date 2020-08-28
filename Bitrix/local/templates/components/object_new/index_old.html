@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+   <link rel="stylesheet" href="main.css">
+  
+
+</head>
+
+<body>
+$USER->IsAdmin() OR $user_id==25485
+
+
+<div class="line line-sm" style="border-right-color: green;"><br></div>
+
+
+
+<div class="object-list">
+    <div class="item">
+        <div class="cell c-img">
+            <a class="img" href="#" style="background-image: url('<?=$pic['src']?>');"></a>
+            <div class="mar">
+            <?if($arResult['PROPERTIES']['facebook']['VALUE']):?>
+                <div class="line line-sm">
+                    <a class="fb-link" href="<?=$arResult['PROPERTIES']['facebook']['VALUE']?>" target="_blank">страница объекта в Facebook</a>
+                </div>
+            <?endif?>
+            <?if($arResult['PROPERTIES']['instagram']['VALUE']):?>
+                <div class="line line-sm">
+                    <a class="ig-link" href="<?=$arResult['PROPERTIES']['instagram']['VALUE']?>" target="_blank">страница объекта в Instagram</a>
+                </div>
+            <?endif?>
+            <?if(count($arResult['HOUSES'])): ?>
+                <div class="line line-sm"><br></div>
+                <?foreach ($arResult['HOUSES'] as $key => $house):?>
+                    <div class="line line-sm object-adress-line">
+                        <img src="<?=SITE_TEMPLATE_PATH?>/images/obj-2.png" alt="" style="height:30px; margin-right:10px;"><span><?=$house?></span>
+                    </div>
+                <?endforeach?>
+            <?endif?>
+            </div>
+        </div>
+        <div class="cell">
+            <div class="date green-link">
+				<a href="/realty/<?=$arParams['CODE']?>/"><?=$arParams['CATEGORY_NAME']?></a>
+			</div>
+            <div class="text">
+				<?=$arResult['DETAIL_TEXT']?>
+			</div>
+            <div class="gallery gallery-sm">
+            <?if(count($arResult['PROPERTIES']['PHOTOS']['VALUE'])):?>
+                <?foreach($arResult['PROPERTIES']['PHOTOS']['VALUE'] as $key => $photo):
+                    $preview = my_resize($photo, 300, 300);
+                    $img = my_resize_watemark($photo, 1200, 960);?>
+                        <div class="item">
+                            <a class="img" href="<?=$img['src']?>" title="<?=$arResult['NAME']?>" data-lightbox="gallery" style="background-image:url('<?=$preview['src']?>');"></a>
+                        </div>
+                <?endforeach?>
+            <?endif?>
+            </div>
+        </div>
+    </div>
+    <?/*<div class="text hidden-xs"><?=htmlspecialchars_decode($arResult['PROPERTIES']['INFO']['VALUE']['TEXT'])?></div>
+    <div class="text hidden-xs"><?=htmlspecialchars_decode($arResult['PROPERTIES']['CONTACTS']['VALUE']['TEXT'])?></div>*/?>
+</div>
+
+
+
+
+
+
+   <div class="header">
+      <div style="width: auto;">
+         <span class="headerText">ЖИЛОЙ</span>
+         <div class="underHeaderText"></div>
+      </div>
+      <span class="headerText2">Москвы сочетает в себе индивидуальный стиль, удобную транспортную доступность и возможность проживания в единении с природой</span>
+
+      <div class="descriptionsContainer">
+         <div class="descriptionBlock">
+            <span class='firstDescription'>77 775</span>
+            <span class='secondDescription'>площадь дома</span>
+         </div>
+
+         <div class="descriptionBlock">
+            <span class='firstDescription'>40 694</span>
+            <span class='secondDescription'>полезная дома</span>
+         </div>
+
+         <div class="descriptionBlock">
+            <span class='firstDescription'>2019</span>
+            <span class='secondDescription'>начало управления</span>
+         </div>
+
+         <div class="descriptionBlock">
+            <span class='firstDescription'> &#60; 1 </span>
+            <span class='secondDescription'>возраст здания</span>
+         </div>
+
+      </div>
+
+      
+ 
+   </div>
+
+   <div class="left">
+
+      <div class="imgBlock">
+         <img width="100%" height="auto" src="img/leftImg.png" alt="">
+      </div>
+      <div id="Social">
+        
+         <a href=""><img class="social" src="img/facebook.png" alt=""></a>
+
+         <a href=""><img class="social" src="img/instagram.png" alt=""></a>
+
+      </div>
+
+
+
+   </div>
+
+
+<?
+ function in_array_r($needle, $haystack, $strict = false) { 
+	foreach ($haystack as $item){ 
+ if ( ($strict ? $item === $needle : $item == $needle) || (is_array($item) && in_array_r($needle, $item, $strict)) ) 
+ { 
+ return true; 
+ } 
+ } return false; 
+ }
+?>
+
+
+</body>
+
+</html>
