@@ -1,9 +1,9 @@
-
+п»ї
 SELECT order_id, status, deliver_date, courier, iner, id 
-FROM ORDERS WHERE deliver_date = '12.08.2020' AND id = '65122' AND status = 'Доставка';
+FROM ORDERS WHERE deliver_date = '12.08.2020' AND id = '65122' AND status = 'Р”РѕСЃС‚Р°РІРєР°';
 -------------
 
---запрос выводит менеджера и первый заказ:
+--Р·Р°РїСЂРѕСЃ РІС‹РІРѕРґРёС‚ РјРµРЅРµРґР¶РµСЂР° Рё РїРµСЂРІС‹Р№ Р·Р°РєР°Р·:
 SELECT o.order_id, cli.client_id, cli.manager_id, cli.client_name, mu.fullname,  o.delivery_date
 FROM  CLIENT as cli 
 LEFT JOIN  ORDER as o ON cli.client_id = o.client_id
@@ -12,15 +12,15 @@ WHERE (cli.manager_id = '12345' OR cli.manager_id = '12333' OR cli.manager_id = 
 AND o.client_id = '6511' ORDER BY o.order_id LIMIT 1;
 -------------
 
-select c.c_name from customer с where c.rating > (select avg(c.rating) from customers с where c.c_city='Санкт-Петербург')
+select c.c_name from customer СЃ where c.rating > (select avg(c.rating) from customers СЃ where c.c_city='РЎР°РЅРєС‚-РџРµС‚РµСЂР±СѓСЂРі')
 and c.c_id in (select o.c_id from orders o where o.o_date between trunc(sysdate,'mm') and sysdate);
 -------------
 
--- Запрос, возвращающий имена 5 лучших продавцов (критерий: количество уникальных заказов) за последний год по покупателям из Москвы, 
--- сделавших не менее 10 заказов, упорядочите список по убыванию:
+-- Р—Р°РїСЂРѕСЃ, РІРѕР·РІСЂР°С‰Р°СЋС‰РёР№ РёРјРµРЅР° 5 Р»СѓС‡С€РёС… РїСЂРѕРґР°РІС†РѕРІ (РєСЂРёС‚РµСЂРёР№: РєРѕР»РёС‡РµСЃС‚РІРѕ СѓРЅРёРєР°Р»СЊРЅС‹С… Р·Р°РєР°Р·РѕРІ) Р·Р° РїРѕСЃР»РµРґРЅРёР№ РіРѕРґ РїРѕ РїРѕРєСѓРїР°С‚РµР»СЏРј РёР· РњРѕСЃРєРІС‹, 
+-- СЃРґРµР»Р°РІС€РёС… РЅРµ РјРµРЅРµРµ 10 Р·Р°РєР°Р·РѕРІ, СѓРїРѕСЂСЏРґРѕС‡РёС‚Рµ СЃРїРёСЃРѕРє РїРѕ СѓР±С‹РІР°РЅРёСЋ:
 SELECT  s.salespeople_name,  COUNT(DISTINCT o.orders_id)  as orders,	COUNT(c.customers_id) as cusromer 
 FROM Salespeople as s LEFT JOIN Orders as o ON  s.salespeople_id = o.salespeople_id LEFT JOIN Customers as c ON o.customers_id = c.customers_id
-WHERE c.customers_city = 'москва'  AND  YEAR(orders_date) = YEAR(curdate())  
+WHERE c.customers_city = 'РјРѕСЃРєРІР°'  AND  YEAR(orders_date) = YEAR(curdate())  
 GROUP BY s.salespeople_name HAVING  cusromer >= '10' ORDER BY s.salespeople_name DESC LIMIT 5
 -------------
 
@@ -41,7 +41,7 @@ order by b.client_id, b.date2
 
 SELECT o.inner_n, o.order_id, o.shk, o.courier_id, o.status, o.delivery_date, o.id, c.cr_fullname 
 FROM ORDERS as o LEFT JOIN COURIERS as c ON o.courier_id = c.id WHERE o.delivery_date = '2020.01.03' 
-AND (client_id = '111' OR client_id = '222') AND (o.brand = 'ПАО' OR o.brand = 'КАРТОЙ');
+AND (client_id = '111' OR client_id = '222') AND (o.brand = 'РџРђРћ' OR o.brand = 'РљРђР РўРћР™');
 -------------
 
 CREATE TABLE PERSONAL (
@@ -57,8 +57,8 @@ PRIMARY KEY (id_user)
 )
 
 INSERT INTO  PERSONAL  (name,  surname,  middlename,  post, id_o,  biryhdate,  dir_id)
-  VALUES( 'Иван', 'Иванов', 'Иванович', 'менеджер', '1', DATE(FROM_UNIXTIME(RAND() * 1561608120)), '6'),
-        ('Сергей', 'Петров', 'Петрович', 'персонаж', '2', DATE(FROM_UNIXTIME(RAND() * 1561608120)), '8');
+  VALUES( 'РРІР°РЅ', 'РРІР°РЅРѕРІ', 'РРІР°РЅРѕРІРёС‡', 'РјРµРЅРµРґР¶РµСЂ', '1', DATE(FROM_UNIXTIME(RAND() * 1561608120)), '6'),
+        ('РЎРµСЂРіРµР№', 'РџРµС‚СЂРѕРІ', 'РџРµС‚СЂРѕРІРёС‡', 'РїРµСЂСЃРѕРЅР°Р¶', '2', DATE(FROM_UNIXTIME(RAND() * 1561608120)), '8');
 
 COMMIT;
 -------------
@@ -75,8 +75,8 @@ FOREIGN KEY (id_user) REFERENCES PERSONAL (id_user)
 )
 
 INSERT INTO  DEPARTMENT (otdel, id_user, name, surname, middlename) 
-  VALUES( 'отдел логистики', '6',  'Розалия',  'Малинина',  'Якововна'),
-        ( 'отдел продаж', '8', 'Евдокия', 'Карчагина', 'Павеловна')
+  VALUES( 'РѕС‚РґРµР» Р»РѕРіРёСЃС‚РёРєРё', '6',  'Р РѕР·Р°Р»РёСЏ',  'РњР°Р»РёРЅРёРЅР°',  'РЇРєРѕРІРѕРІРЅР°'),
+        ( 'РѕС‚РґРµР» РїСЂРѕРґР°Р¶', '8', 'Р•РІРґРѕРєРёСЏ', 'РљР°СЂС‡Р°РіРёРЅР°', 'РџР°РІРµР»РѕРІРЅР°')
 -------------
 
 SELECT  p.surname as familiya, CONCAT_WS('.', LEFT(p.name,1), LEFT(p.surname,1), LEFT(p.middlename,1)) as fio, 
@@ -89,27 +89,27 @@ SELECT t.*,a.BANKACCOUNTNO,a.LOGINNAME,a.USERNAME,a.ISACTIVE,a.ISDELETED,a.ISAPP
 FROM BA a RIGHT JOIN TRANSACTIONLOG t ON a.BANKACCOUNTNO = t.BANKACCOUNTNO
 WHERE a.LOGINNAME IN ('Ivanov-NA@sbrf.ru', 'Gupkin-LA@tb6') 
 AND t.TRANSACTIONDATE BETWEEN to_date('15.05.2020','DD.MM.YY') AND to_date('19.06.2020','DD.MM.YY') 
-AND (t.AUDITMESSAGE = 'Попытка входа' OR t.AUDITMESSAGE = 'Вход в систему');
+AND (t.AUDITMESSAGE = 'РџРѕРїС‹С‚РєР° РІС…РѕРґР°' OR t.AUDITMESSAGE = 'Р’С…РѕРґ РІ СЃРёСЃС‚РµРјСѓ');
 -------------
 
-insert into log (id, what, val) values ('".$v['id']."',  'Статус', 'на склад');
+insert into log (id, what, val) values ('".$v['id']."',  'РЎС‚Р°С‚СѓСЃ', 'РЅР° СЃРєР»Р°Рґ');
 -------------
 
-UPDATE ORDERS SET status = 'Статус' WHERE order = '".$v['id']."' LIMIT 1;
+UPDATE ORDERS SET status = 'РЎС‚Р°С‚СѓСЃ' WHERE order = '".$v['id']."' LIMIT 1;
 -------------
 
 SELECT
-    LN.TEXTANSWER||' '||FN.TEXTANSWER||' '||MN.TEXTANSWER "ФИО",
-    TN.TEXTANSWER "Номер телефона",
-    A.CREATEDATE "Дата создания",
-    P.CREATEDATE "Дата предложения",   
-    A.PRODUCTTYPE "Тип продукта",
-    P.PRODUCTNAME "Название страхового продукта",   
-    U.UNDERWRITINGSTATUS "Статус заявления",
-    U2.UNDERWRITINGSTATUS "Статус предложения",
-    A.DOWNPAYMENTAMOUNT "Страховая премия",   
-    B.USERNAME "ФИО сотрудника",
-    O.OFFICENAME "ВСП"
+    LN.TEXTANSWER||' '||FN.TEXTANSWER||' '||MN.TEXTANSWER "Р¤РРћ",
+    TN.TEXTANSWER "РќРѕРјРµСЂ С‚РµР»РµС„РѕРЅР°",
+    A.CREATEDATE "Р”Р°С‚Р° СЃРѕР·РґР°РЅРёСЏ",
+    P.CREATEDATE "Р”Р°С‚Р° РїСЂРµРґР»РѕР¶РµРЅРёСЏ",   
+    A.PRODUCTTYPE "РўРёРї РїСЂРѕРґСѓРєС‚Р°",
+    P.PRODUCTNAME "РќР°Р·РІР°РЅРёРµ СЃС‚СЂР°С…РѕРІРѕРіРѕ РїСЂРѕРґСѓРєС‚Р°",   
+    U.UNDERWRITINGSTATUS "РЎС‚Р°С‚СѓСЃ Р·Р°СЏРІР»РµРЅРёСЏ",
+    U2.UNDERWRITINGSTATUS "РЎС‚Р°С‚СѓСЃ РїСЂРµРґР»РѕР¶РµРЅРёСЏ",
+    A.DOWNPAYMENTAMOUNT "РЎС‚СЂР°С…РѕРІР°СЏ РїСЂРµРјРёСЏ",   
+    B.USERNAME "Р¤РРћ СЃРѕС‚СЂСѓРґРЅРёРєР°",
+    O.OFFICENAME "Р’РЎРџ"
 FROM APP A
 LEFT JOIN QQ LN ON LN.CUSTOMERNO = A.CUSTOMERNO AND LN.QUESTIONNO = 1234
 LEFT JOIN QQ FN ON FN.CUSTOMERNO = A.CUSTOMERNO AND FN.QUESTIONNO = 5678
@@ -158,7 +158,7 @@ bill.aus_status, bill.aus_date, bill.anp_status, bill.anp_date, bill.act_id
 FROM AGP_BILL as bill 
 LEFT JOIN PVZD as pvz ON bill.pvz_id = pvz.id
 LEFT JOIN AGENT as ag ON pvz.pagent_id = ag.id  
-WHERE  anp_status = 'Не оплачен' AND date = '2019-03-10') as q GROUP BY q.itog;
+WHERE  anp_status = 'РќРµ РѕРїР»Р°С‡РµРЅ' AND date = '2019-03-10') as q GROUP BY q.itog;
 -------------
 
 SELECT  
@@ -189,7 +189,7 @@ FROM (
       LEFT JOIN parent_company as p ON c.parent_company = p.id
       WHERE 
         (
-          b.check_status = 'оплачен'  
+          b.check_status = 'РѕРїР»Р°С‡РµРЅ'  
           AND b.vi4et_status_date IS NULL
         ) 
       AND c.client_id NOT IN (777)
